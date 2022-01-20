@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Alamofire
+
 
 class RickCell: UITableViewCell {
     @IBOutlet var imageOfCharacter: UIImageView! {

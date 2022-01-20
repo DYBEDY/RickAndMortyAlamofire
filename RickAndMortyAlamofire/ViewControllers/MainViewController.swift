@@ -34,34 +34,16 @@ class MainViewController: UITableViewController {
 }
   
     private func fetchDataWithAlamofire() {
-        AF.request("https://rickandmortyapi.com/api/character", method: .get)
-            .validate()
-            .responseJSON { dataResponse in
-                switch dataResponse.result {
-                    
-                case .success(let value):
-                    print(value)
-                    guard let rickData = value as? [String: Any] else { return }
-                    guard let results = rickData["results"] as? [[String: Any]] else { return }
-                    
-                    for result in results {
-                        let person = Characters(
-                            name: result["name"] as? String,
-                            status: result["status"] as? String,
-                            species: result["species"] as? String,
-                            type: result["type"] as? String,
-                            gender: result["gender"] as? String,
-                            image: result["image"] as? String
-                        )
-                        self.characters.append(person)
-                      
-                    }
-                    self.tableView.reloadData()
-                    
-                case .failure(let error):
-                    print(error )
-                }
+        NetworkManager.shared.fetchData("https://rickandmortyapi.com/api/character") { result in
+            switch result {
+            
+            case .success(let characters):
+                self.characters = characters
+                self.tableView.reloadData()
+            case .failure(let error):
+                    print(error)
             }
+        }
     }
  
 
