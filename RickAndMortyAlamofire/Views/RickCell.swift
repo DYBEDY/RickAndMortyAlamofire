@@ -13,8 +13,9 @@ class RickCell: UITableViewCell {
         didSet {
             imageOfCharacter.contentMode = .scaleAspectFit
             imageOfCharacter.clipsToBounds = true
-            imageOfCharacter.layer.cornerRadius = imageOfCharacter.frame.height / 2
-            imageOfCharacter.backgroundColor = .white
+            imageOfCharacter.layer.cornerRadius = imageOfCharacter.bounds.height / 1.75
+            imageOfCharacter.clipsToBounds = true
+            imageOfCharacter.backgroundColor = .black
         }
     }
     @IBOutlet var nameOfCharacter: UILabel!

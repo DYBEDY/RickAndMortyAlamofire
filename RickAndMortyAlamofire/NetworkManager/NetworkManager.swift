@@ -22,18 +22,18 @@ class NetworkManager {
     
     
     func fetchData(_ url: String, completion: @escaping(Result<[Characters], NetworkError>) -> Void) {
-    AF.request(url)
-        .validate()
-        .responseJSON { dataResponse in
-            switch dataResponse.result {
-                
-            case .success(let value):
-                let characters = Characters.getCharacters(from: value)
-                completion(.success(characters))
-            case .failure:
-                completion(.failure(.decodingError))
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                    
+                case .success(let value):
+                    let characters = Characters.getCharacters(from: value)
+                    completion(.success(characters))
+                case .failure:
+                    completion(.failure(.decodingError))
+                }
             }
-        }
-}
+    }
     
 }
